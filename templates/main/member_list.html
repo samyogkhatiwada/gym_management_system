@@ -1,0 +1,49 @@
+{% extends 'base/admin_base.html' %}
+{% block title %}All Members{% endblock title %}
+{% block members %} active {% endblock members %}
+{% block content %}
+<div class="pagetitle">
+  <h1>Add Members</h1>
+  <nav>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'memberlist' %}">Members</a></li>
+      <li class="breadcrumb-item active">Add</li>
+    </ol>
+  </nav>
+</div><!-- End Page Title -->
+
+<div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Members</h5>
+      <p> <a href="{% url 'addmember' %}" > <code>.add</code> </a> </p>
+      <!-- Table with stripped rows -->
+      <table class="table datatable">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Start Date</th>
+            <th scope="col">Contact</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for customer in customerlist %}
+
+          <tr>
+            <th scope="row">{{customer.id}}</th>
+            <td>{{ customer.fullName }}</td>
+            <td>{{customer.joining_date }}</td>
+            <td>{{ customer.contact }}</td>
+            <td><a href="{% url 'memberdetail' customer.pk %}">View</a></td>
+          </tr>
+          {% endfor %}
+
+        </tbody>
+      </table>
+      <!-- End Table with stripped rows -->
+
+    </div>
+  </div>
+{% endblock content %}

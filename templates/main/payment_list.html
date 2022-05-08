@@ -1,0 +1,49 @@
+{% extends 'base/admin_base.html' %}
+{% block title %}All Members{% endblock title %}
+{% block payment %}active{% endblock payment %}
+{% block content %}
+<div class="pagetitle">
+  <h1>Add Members</h1>
+  <nav>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'memberlist' %}">Payments</a></li>
+      <li class="breadcrumb-item active">Add</li>
+    </ol>
+  </nav>
+</div><!-- End Page Title -->
+
+<div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Transaction History</h5>
+      {% comment %} <p> <a href="{% url 'addcustomer' %}" > <code>.add</code> </a> </p> {% endcomment %}
+      <!-- Table with stripped rows -->
+      <table class="table datatable">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Date</th>
+            <th scope="col">Member</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for payment in payments %}
+
+          <tr>
+            <th scope="row">{{payment.id}}</th>
+            <td>{{ payment.date }}</td>
+            <td>{{ payment.member }}</td>
+            <td>{{ payment.amount }}</td>
+            <td><a >View</a></td>
+          </tr>
+          {% endfor %}
+
+        </tbody>
+      </table>
+      <!-- End Table with stripped rows -->
+
+    </div>
+  </div>
+{% endblock content %}

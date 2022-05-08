@@ -1,0 +1,57 @@
+{% extends 'base/admin_base.html' %}
+{% block title %}{{ customer.fullName }}{% endblock title %}
+{% block content %}
+<div class="pagetitle">
+  <h1>User Detail</h1>
+  <nav>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'memberlist' %}">Members</a></li>
+      <li class="breadcrumb-item">{{ customer.fullName }}</li>
+    </ol>
+  </nav>
+</div><!-- End Page Title -->
+
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">User Detail View</h5>
+
+    <!-- Default List group -->
+    <ul class="list-group">
+      <li class="list-group-item">Name: {{ customer.fullName  }}</li>
+      <li class="list-group-item">Address: {{ customer.address }}</li>
+      <li class="list-group-item">Email: {{ customer.email }}</li>
+      <li class="list-group-item">Contact: {{ customer.contact }}</li>
+      <li class="list-group-item">Gender: {{ customer.gender }}</li>
+      <li class="list-group-item">Joining Date: {{ customer.joining_date }}</li>
+
+    </ul><!-- End Default List group -->
+
+
+  </div>
+</div>
+<div class="card">
+  <div class="card-header"> <a href="{% url 'addpayment' %}">Add New Payment</a> </div>
+  <div class="card-body">
+    <h5 class="card-title">Payment History</h5>
+
+    <!-- Default List group -->
+    {% for payment in payments %}
+    <ul class="list-group">
+
+    <li class="list-group-item">Date: {{ payment.date }}</li>
+    <li class="list-group-item">Description: {{ payment.description }}</li>
+    <li class="list-group-item">Amount: {{ payment.amount }}</li>
+    <li class="list-group-item">For Months: {{ payment.description }}</li>
+
+  </ul><!-- End Default List group -->
+  <hr>
+  {% empty %}
+  No Payment Yet
+  {% endfor %}
+
+
+  </div>
+</div>
+
+{% endblock content %}
