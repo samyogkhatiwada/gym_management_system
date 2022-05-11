@@ -5,7 +5,7 @@
 <div class="card">
     <div class="card-body">
       <h5 class="card-title">Trainers</h5>
-      <p> <a href="{% url 'addtrainer' %}" > <code>.add</code> </a> </p>
+      <p> <a href="{% url 'addtrainer' %}" > Add New Trainer </a> </p>
       <!-- Table with stripped rows -->
       <table class="table datatable">
         <thead>
@@ -25,7 +25,7 @@
             <td>{{ trainer.fullName }}</td>
             <td>{{ trainer.address }}</td>
             <td>{{ trainer.contact }}</td>
-            <td>View</td>
+            {% comment %} <td><a href="{% url 'addtrainer' trainer.pk %}">View</a></td> {% endcomment %}
           </tr>
           {% endfor %}
 

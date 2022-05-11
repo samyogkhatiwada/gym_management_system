@@ -1,14 +1,13 @@
 {% extends 'base/admin_base.html' %}
-{% block title %}All Members{% endblock title %}
+{% block title %}Payment{% endblock title %}
 {% block payment %}active{% endblock payment %}
 {% block content %}
 <div class="pagetitle">
-  <h1>Add Members</h1>
+  <h1>Transaction History</h1>
   <nav>
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
-      <li class="breadcrumb-item"><a href="{% url 'memberlist' %}">Payments</a></li>
-      <li class="breadcrumb-item active">Add</li>
+      <li class="breadcrumb-item active">Payment</li>
     </ol>
   </nav>
 </div><!-- End Page Title -->
@@ -25,7 +24,7 @@
             <th scope="col">Date</th>
             <th scope="col">Member</th>
             <th scope="col">Amount</th>
-            <th scope="col">Action</th>
+            <th scope="col">Remarks</th>
           </tr>
         </thead>
         <tbody>
@@ -36,12 +35,20 @@
             <td>{{ payment.date }}</td>
             <td>{{ payment.member }}</td>
             <td>{{ payment.amount }}</td>
-            <td><a >View</a></td>
+            {% load mathfilters %}
+            <td> 
+              {% if payment.amount < payment.type.price %}
+              Due {{ payment.type.price | sub:payment.amount }}
+              {% elif payment.amount == payment.type.price%} Clear 
+              {% else %} Extra {{ payment.amount | sub:payment.type.price }} {% endif %}</td>
+            
           </tr>
           {% endfor %}
 
+
         </tbody>
       </table>
+      
       <!-- End Table with stripped rows -->
 
     </div>

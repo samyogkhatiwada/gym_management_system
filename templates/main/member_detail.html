@@ -11,19 +11,22 @@
     </ol>
   </nav>
 </div><!-- End Page Title -->
+<img src="{{ customer.photo.url }}" alt="">
 
 <div class="card">
   <div class="card-body">
     <h5 class="card-title">User Detail View</h5>
 
     <!-- Default List group -->
+    
     <ul class="list-group">
       <li class="list-group-item">Name: {{ customer.fullName  }}</li>
       <li class="list-group-item">Address: {{ customer.address }}</li>
       <li class="list-group-item">Email: {{ customer.email }}</li>
       <li class="list-group-item">Contact: {{ customer.contact }}</li>
-      <li class="list-group-item">Gender: {{ customer.gender }}</li>
+      <li class="list-group-item">Gender: {{ customer.uid }}</li>
       <li class="list-group-item">Joining Date: {{ customer.joining_date }}</li>
+      <li class="list-group-item"> <a href="">Update</a> <a href="{% url 'memberdelete' customer.pk %}">Delete</a>  </li>
 
     </ul><!-- End Default List group -->
 
@@ -42,7 +45,7 @@
     <li class="list-group-item">Date: {{ payment.date }}</li>
     <li class="list-group-item">Description: {{ payment.description }}</li>
     <li class="list-group-item">Amount: {{ payment.amount }}</li>
-    <li class="list-group-item">For Months: {{ payment.description }}</li>
+    <li class="list-group-item">For Months: {{ payment.type.price }}</li>
 
   </ul><!-- End Default List group -->
   <hr>
