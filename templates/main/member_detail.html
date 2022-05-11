@@ -11,28 +11,32 @@
     </ol>
   </nav>
 </div><!-- End Page Title -->
-<img src="{{ customer.photo.url }}" alt="">
-
-<div class="card">
-  <div class="card-body">
-    <h5 class="card-title">User Detail View</h5>
-
-    <!-- Default List group -->
+<div class="card mb-3">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="{{ customer.photo.url }}" class="img-fluid rounded-start" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">Member Detail Page</h5>
+        <ul class="list-group">
+          <li class="list-group-item">Name: {{ customer.fullName  }}</li>
+          <li class="list-group-item">Address: {{ customer.address }}</li>
+          <li class="list-group-item">Email: {{ customer.email }}</li>
+          <li class="list-group-item">Contact: {{ customer.contact }}</li>
+          <li class="list-group-item">Gender: {{ customer.uid }}</li>
+          <li class="list-group-item">Joining Date: {{ customer.joining_date }}</li>
+          <li class="list-group-item"> <a href="{% url 'memberupdate' customer.pk %}">Update</a> <a href="{% url 'memberdelete' customer.pk %}">Delete</a>  </li>
     
-    <ul class="list-group">
-      <li class="list-group-item">Name: {{ customer.fullName  }}</li>
-      <li class="list-group-item">Address: {{ customer.address }}</li>
-      <li class="list-group-item">Email: {{ customer.email }}</li>
-      <li class="list-group-item">Contact: {{ customer.contact }}</li>
-      <li class="list-group-item">Gender: {{ customer.uid }}</li>
-      <li class="list-group-item">Joining Date: {{ customer.joining_date }}</li>
-      <li class="list-group-item"> <a href="">Update</a> <a href="{% url 'memberdelete' customer.pk %}">Delete</a>  </li>
-
-    </ul><!-- End Default List group -->
-
-
+        </ul><!-- End Default List group -->
+    
+      </div>
+    </div>
   </div>
-</div>
+</div><!-- End Card with an image on left -->
+
+
+
 <div class="card">
   <div class="card-header"> <a href="{% url 'addpayment' %}">Add New Payment</a> </div>
   <div class="card-body">

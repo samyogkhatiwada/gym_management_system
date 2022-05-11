@@ -1,4 +1,5 @@
 from audioop import reverse
+from dataclasses import fields
 import imp
 from operator import mod
 from pyexpat import model
@@ -17,12 +18,12 @@ class CustomLogin(LoginView):
 
 # Dashboard View 
 class Dashboard(LoginRequiredMixin, TemplateView):
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
 
-        context['notrainers'] = len(Trainer.objects.all()) 
-        context['nomembers'] = len(Member.objects.all()) 
-        return context
+    #     context['notrainers'] = len(Trainer.objects.all()) 
+    #     context['nomembers'] = len(Member.objects.all()) 
+    #     return context
     template_name = "main/index.html"
 # Add Member 
 class AddMember(LoginRequiredMixin, CreateView):
@@ -54,6 +55,22 @@ class MemberDetail(LoginRequiredMixin, DetailView):
         context['payments'] = instance.payment_set.all()
         return context
     context_object_name= 'customer'
+#  member delete
+class MemberUpdate(LoginRequiredMixin, UpdateView):
+    model = Member
+    fields = [
+        "fullName",
+        "address",
+        "plan",
+        "email",
+        "contact",
+        "photo",
+        "trainer",
+    ]
+    context_object_name= 'customer'
+    template_name = "main/member_update.html"
+
+  
 # member delete
 class MemberDelete(LoginRequiredMixin, DeleteView):
     model = Member

@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone
-
+import uuid
 class Member(models.Model):  
     fullName = models.CharField(max_length=100)
     address = models.CharField(max_length=100)
@@ -24,7 +24,8 @@ class Member(models.Model):
     description = models.TextField()
     def __str__(self):
         
-        return self.fullName + ' - ' + self.email
+        return self.fullName + ' - ' + f'{self.id}'
+
 class Trainer(models.Model):
     fullName = models.CharField(max_length=100)
     address = models.CharField(max_length=100)
@@ -46,6 +47,9 @@ class Payment(models.Model):
     )
     def __str__(self):
         return self.description
+        
 class Plan(models.Model):
     title = models.CharField(max_length=20)
     price = models.IntegerField()
+    def __str__(self):
+        return self.title
