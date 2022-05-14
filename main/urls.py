@@ -1,7 +1,7 @@
 import imp
 from django.urls import path, include
 from . import views
-from .views import AddMember, Members, MemberDetail, Payment, AddTrainer, Trainers, Messages, CustomLogin, Dashboard, AddPayment, MemberDelete, TrainerDetail, MemberUpdate
+from .views import AddMember, Members, MemberDetail, Payment, AddTrainer, Trainers, CustomLogin, Dashboard, AddPayment, MemberDelete, TrainerDetail, MemberUpdate
 
 from django.contrib.auth.views import LogoutView
 urlpatterns = [
@@ -19,6 +19,5 @@ urlpatterns = [
     path('trainer', Trainers.as_view(), name='trainerlist'),
     path('trainer/add', AddTrainer.as_view(), name='addtrainer'),
     path('trainer/<pk>', TrainerDetail.as_view(), name='trainerdetail'),
-    path('message', Messages.as_view(), name='messagelist'),
     
 ]

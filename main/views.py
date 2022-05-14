@@ -1,13 +1,8 @@
 from audioop import reverse
-from dataclasses import fields
-import imp
-from operator import mod
-from pyexpat import model
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, UpdateView, CreateView, DeleteView, DetailView, TemplateView
 from .models import Member, Trainer, Payment
-from home.models import Contact
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -18,12 +13,12 @@ class CustomLogin(LoginView):
 
 # Dashboard View 
 class Dashboard(LoginRequiredMixin, TemplateView):
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
 
-    #     context['notrainers'] = len(Trainer.objects.all()) 
-    #     context['nomembers'] = len(Member.objects.all()) 
-    #     return context
+        context['notrainers'] = len(Trainer.objects.all()) 
+        context['nomembers'] = len(Member.objects.all()) 
+        return context
     template_name = "main/index.html"
 # Add Member 
 class AddMember(LoginRequiredMixin, CreateView):
@@ -74,7 +69,7 @@ class MemberUpdate(LoginRequiredMixin, UpdateView):
 # member delete
 class MemberDelete(LoginRequiredMixin, DeleteView):
     model = Member
-    success_url = reverse_lazy('member')
+    success_url = reverse_lazy('memberlist')
 
 # trainer list
 class Trainers(LoginRequiredMixin, ListView):
@@ -95,8 +90,3 @@ class Payment(LoginRequiredMixin, ListView):
     
     context_object_name= 'payments'
 
-# message history
-class Messages(LoginRequiredMixin, ListView):
-    model = Contact
-    context_object_name = 'messages'
-    template_name = "main/contact_list.html"
