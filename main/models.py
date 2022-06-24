@@ -38,13 +38,13 @@ class Trainer(models.Model):
 class Payment(models.Model):
     member = models.ForeignKey('Member',  on_delete=models.CASCADE)
     amount = models.IntegerField()
-    description = models.TextField()
-    date = models.DateTimeField(auto_now= True)
     type = models.ForeignKey('Plan', on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now= True)
     month = models.CharField(
         max_length=100,
         
     )
+    description = models.TextField()
     def __str__(self):
         return self.description
         

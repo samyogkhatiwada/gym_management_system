@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'main.apps.MainConfig',
     'crispy_forms',
     'mathfilters',
+    "crispy_tailwind",
 ]
 
 MIDDLEWARE = [
@@ -138,7 +139,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
+CRISPY_TEMPLATE_PACK = 'tailwind'
 LOGIN_URL = "login"
 LOGIN_REDIRECT_URL = "memberlist"
 LOGOUT_REDIRECT_URL = "login"

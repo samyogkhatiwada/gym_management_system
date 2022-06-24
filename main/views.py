@@ -2,7 +2,7 @@ from audioop import reverse
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, UpdateView, CreateView, DeleteView, DetailView, TemplateView
-from .models import Member, Trainer, Payment
+from .models import Member, Trainer, Payment, Plan
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -28,19 +28,6 @@ class AddMember(LoginRequiredMixin, CreateView):
     def get_success_url(self):
         agent_id = self.object.id
         return reverse_lazy('memberdetail', kwargs={'pk': agent_id})
-class AddTrainer(LoginRequiredMixin, CreateView):
-    model = Trainer
-    success_url = reverse_lazy('trainerlist')
-    fields = '__all__'
-# Add Payment 
-class AddPayment(LoginRequiredMixin, CreateView):
-    model = Payment
-    success_url = reverse_lazy('payments')
-    fields = '__all__'
-# Members List 
-class Members(LoginRequiredMixin, ListView):
-    model = Member
-    context_object_name= 'customerlist'
 # Member Detail
 class MemberDetail(LoginRequiredMixin, DetailView):
     model = Member
@@ -50,7 +37,12 @@ class MemberDetail(LoginRequiredMixin, DetailView):
         context['payments'] = instance.payment_set.all()
         return context
     context_object_name= 'customer'
-#  member delete
+# Members List 
+class Members(LoginRequiredMixin, ListView):
+    model = Member
+    context_object_name= 'customerlist'
+    ordering = ['-joining_date']
+#  member update
 class MemberUpdate(LoginRequiredMixin, UpdateView):
     model = Member
     fields = [
@@ -64,17 +56,15 @@ class MemberUpdate(LoginRequiredMixin, UpdateView):
     ]
     context_object_name= 'customer'
     template_name = "main/member_update.html"
-
-  
 # member delete
 class MemberDelete(LoginRequiredMixin, DeleteView):
     model = Member
     success_url = reverse_lazy('memberlist')
-
-# trainer list
-class Trainers(LoginRequiredMixin, ListView):
+# add trainer
+class AddTrainer(LoginRequiredMixin, CreateView):
     model = Trainer
-    context_object_name= 'trainerlist'
+    success_url = reverse_lazy('trainerlist')
+    fields = '__all__'
 # trainer detail 
 class TrainerDetail(LoginRequiredMixin, DetailView):
     model = Trainer
@@ -84,9 +74,29 @@ class TrainerDetail(LoginRequiredMixin, DetailView):
         context['members'] = instance.member_set.all()
         return context
     context_object_name= 'trainer'
-# transaction history
+# trainer list
+class Trainers(LoginRequiredMixin, ListView):
+    model = Trainer
+    context_object_name= 'trainerlist'
+# Add Payment 
+class AddPayment(LoginRequiredMixin, CreateView):
+    model = Payment
+    success_url = reverse_lazy('payments')
+    fields = '__all__'
+
+# transaction history /payment view list
 class Payment(LoginRequiredMixin, ListView):
     model = Payment
     
     context_object_name= 'payments'
+    ordering= ['-date']
 
+# add plans
+class createPlan(CreateView):
+    model = Plan
+    template_name = "main/createplan.html"
+    fields = '__all__'
+ #list plans
+class Plans(ListView):
+    model= Plan
+    context_object_name= 'plans'

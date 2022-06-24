@@ -1,6 +1,9 @@
 {% extends 'base/admin_base.html' %}
 {% block title %}Add Customer{% endblock title %}
+{% block members %}active{% endblock members %}
+
 {% block content %}
+<script src="https://cdn.tailwindcss.com"></script>
 <div class="pagetitle">
       <h1>Add Members</h1>
       <nav>
@@ -22,9 +25,12 @@
               <form class="row g-3" method="post" enctype="multipart/form-data">
                   {% csrf_token %}
                 {{ form|crispy}}
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                  <button type="reset" class="btn btn-secondary">Reset</button>
-                </div>
+                <button type="submit"
+                class="transition duration-200 bg-gray-700 hover:bg-gray-800 focus:bg-gray-900 focus:shadow-sm focus:ring-4 focus:ring-gray-500 focus:ring-opacity-50 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block">
+                <span class="inline-block mr-2">Add</span>
+               
+              </button>
+
               </form><!-- Vertical Form -->
 
             </div>
