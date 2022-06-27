@@ -7,7 +7,7 @@ class Member(models.Model):
     contact = models.CharField(max_length=10)
     email = models.EmailField()
     joining_date = models.DateField(default=timezone.now)
-    trainer = models.ForeignKey('Trainer',  on_delete=models.CASCADE, default=None)
+    trainer = models.ForeignKey('Trainer',  on_delete=models.CASCADE, blank=True)
     photo = models.ImageField(upload_to='member/')
     plan = models.ForeignKey('Plan', on_delete=models.CASCADE)
     GENDER = (
